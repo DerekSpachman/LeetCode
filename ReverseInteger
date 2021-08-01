@@ -1,0 +1,15 @@
+class Solution {
+    public int reverse(int x) {
+        try {
+            String num = x < 0 ? (x * -1) + "" : x + "";
+            String toReturn = "";
+            for(int i = num.length() - 1; i >= 0; i--) {
+                toReturn += num.charAt(i);
+            }
+            return x < 0 ? Integer.valueOf("-" + toReturn) : Integer.valueOf(toReturn);
+        }
+        catch(Exception e) {
+            return 0;
+        }
+    }
+}
