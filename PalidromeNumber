@@ -1,0 +1,24 @@
+/*
+ * Given an integer x, return true if x is palindrome integer.
+ * 
+ * An integer is a palindrome when it reads the same backward as forward. For example, 121 is palindrome while 123 is not.
+*/ 
+class Solution {
+    public boolean isPalindrome(int x) {
+        //negatives are not palindromes
+        if(x < 0)
+            return false;
+        
+        int num = x;
+        int pal = 0;
+        int remainder = 0;
+        while(num != 0) {
+            remainder = num % 10;       //get last digit
+            pal = pal * 10 + remainder; //build the int backwards
+            num /= 10;                  //remove last digit for next iteration
+        }
+        return pal == x;
+    }
+}
+
+class LeetSolution { } //was done in C#
