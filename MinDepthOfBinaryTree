@@ -1,0 +1,75 @@
+/**
+ * Given a binary tree, find its minimum depth.
+ * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+ * 
+ * The number of nodes in the tree is in the range [0, 105].
+ * -1000 <= Node.val <= 1000
+ * 
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int minDepth(TreeNode p) {
+        if(p == null)
+            return 0;
+        
+        int left = 1 + minDepth(p.left);
+        int right = 1 + minDepth(p.right);
+        
+        if(left == 1 && right > 1)
+            return right;
+        else if(right == 1 && left > 1)
+            return left;
+        return Math.min(left, right);
+    }
+}
+
+
+
+class swapnilGhosh
+{//BFS
+    public int minDepth(TreeNode root) 
+    {
+        if(root==null)//base case 
+            return 0;
+        
+        Queue<TreeNode> q=new ArrayDeque<>();//Queue to store the child and parent and popping them  
+        
+        q.offer(root);
+        int depth=1;//level 1
+        
+        while(!q.isEmpty())//till the Queueis Not Empty 
+        {
+            int size= q.size();//popping constraint 
+            while(size-->0)
+            {
+               TreeNode temp=q.peek();
+            
+               if(temp.left==null && temp.right==null)//leaf node 
+                   return depth;//depth  contains the node (like ST)
+               else 
+               {//pushing thechils node if it is not null 
+                  if(temp.left!= null)
+                     q.offer(temp.left);
+            
+                  if(temp.right!= null)
+                      q.offer(temp.right);
+                }
+                q.poll();//popping the node which has been checked 
+            }
+            depth+=1;//increasing the level 
+        }
+        return 0;
+    }
+}
