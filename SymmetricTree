@@ -1,0 +1,55 @@
+/**
+ * Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+ * 
+ * The number of nodes in the tree is in the range [1, 1000].
+ * -100 <= Node.val <= 100
+ * 
+ * 
+ * 
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode searchBST(TreeNode p, int val) {
+        if(p == null)
+            return null;
+        
+        if(p.val == val)
+            return p;
+        
+        TreeNode left = searchBST(p.left, val);
+        TreeNode right = searchBST(p.right, val);
+        
+        if(left != null)
+            return left;
+        else if(right != null)
+            return right;
+        return null;
+    }
+}
+
+
+
+//javoid takes advantage of the fact BST are sorted.
+class javoid {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root == null) return null;
+        
+        if(root.val == val) return root;
+        
+        if(root.val > val) return searchBST(root.left, val);
+        
+        return searchBST(root.right, val);
+    }
+}
