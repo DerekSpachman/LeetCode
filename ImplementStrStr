@@ -1,0 +1,54 @@
+/**
+ * Implement strStr().
+ * Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+ * return 0 when needle is an empty string.
+ * 
+ * 
+ * 0 <= haystack.length, needle.length <= 5 * 104
+ * haystack and needle consist of only lower-case English characters.
+ */
+
+class Solution {
+    public int strStr(String haystack, String needle) {
+        if(needle.length() == 0)
+            return 0;
+        if(needle.length() > haystack.length())
+            return -1;
+        
+        for(int i = 0; i < haystack.length(); i++)
+            if(haystack.charAt(i) == needle.charAt(0) &&
+                    i + needle.length() - 1 < haystack.length() && 
+                    haystack.substring(i, i + needle.length()).equals(needle))
+                return i;
+        return -1;
+    }
+}
+
+
+
+class Nam_22 {
+    public int strStr(String haystack, String needle) {
+        
+		// base cases
+        if(haystack.equals("") && needle.equals("")) return 0;
+        if(needle.equals("")) return 0;
+        
+        int begin = 0, end = 0, n = haystack.length()-1;
+        
+        while(end <= n) {
+		    // keep incrementing until we reach window size
+            if(end-begin+1 < needle.length()) {
+				end++;
+			}
+            else {
+				
+                if(haystack.substring(begin, end+1).equals(needle)) return begin;
+				
+				// maintain the size of window
+                begin++;
+                end++;
+            }
+        }
+        return -1;
+    }
+}
