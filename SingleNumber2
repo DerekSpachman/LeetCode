@@ -1,0 +1,39 @@
+/**
+ * Given an integer array nums where every element appears three times except for one, which appears exactly once. Find the single element and return it.
+ * 
+ * 1 <= nums.length <= 3 * 10^4
+ * -2^31 <= nums[i] <= 2^31 - 1
+ * Each element in nums appears exactly three times except for one element which appears once.
+ */
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>(nums.length / 3 + 1);
+        for(int i = 0; i < nums.length; i++) {
+            if(map.containsKey(nums[i]))
+                map.replace(nums[i], map.get(nums[i]) + 1);
+            else
+                map.put(nums[i], 1);
+        }
+        
+        for(Map.Entry<Integer, Integer> entry : map.entrySet())
+            if(entry.getValue() == 1)
+                return entry.getKey();
+        return 0;
+    }
+}
+
+
+
+class shahbaz_mirza {
+    public int singleNumber(int[] nums) {
+        int ones=0;
+        int twos=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            ones= (ones^nums[i])&(~twos);
+            twos= (twos^nums[i])&(~ones);
+        }
+        return ones;
+    }
+}
