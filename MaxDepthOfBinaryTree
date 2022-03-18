@@ -48,6 +48,15 @@ class Solution {
         
         return level;
     }
+    
+    private int dfs(TreeNode p) {
+        if(p == null)
+            return 0;
+        
+        int left = dfs(p.left) + 1;
+        int right = dfs(p.right) + 1;
+        return left < right ? right : left;
+    }
 }
 
 class Madhav1301 {
