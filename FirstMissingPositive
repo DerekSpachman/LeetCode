@@ -1,0 +1,20 @@
+/**
+ * Given an unsorted integer array nums, return the smallest missing positive integer.
+ * 
+ * You must implement an algorithm that runs in O(n) time and uses constant extra space.
+ */
+
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        SortedSet<Integer> set = new TreeSet();
+        for(int i = 0; i < nums.length; i++)
+            if(nums[i] > 0)
+                set.add(nums[i]);
+        
+        for(int i = 1; i <= nums.length; i++)
+            if(!set.contains(i))
+                return i;
+        
+        return set.last() + 1;
+    }
+}
