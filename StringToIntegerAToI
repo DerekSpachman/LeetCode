@@ -1,0 +1,55 @@
+class Solution {
+    public int myAtoi(String string) {
+        if(string.equals(""))
+            return 0;
+        
+        //Read in and ignore any leading whitespace.
+        int start = 0;
+        while(start < string.length() && string.charAt(start) == ' ')
+            start++;
+        
+        //check for '-' or '+'
+        int sign = 1;
+        if(start < string.length() && string.charAt(start) == '+')
+            start++;
+        else if(start < string.length() && string.charAt(start) == '-') {
+            sign = -1;
+            start++;
+        }
+        
+        //ignore leading '0's
+        while(start < string.length() && string.charAt(start) == '0')
+            start++;
+        
+        //get the number
+        string = string.substring(start);
+        int length = 0;
+        for(int i = 0; i < string.length() && string.charAt(i) > 47 && string.charAt(i) < 58; i++) {
+            length++;
+        }
+        
+        //check within range, return clamps if false, else return the number
+        string = string.substring(0, length);
+        //empty
+        if(string.equals(""))
+            return 0;
+        
+        //num too large for long type
+        if(string.length() > 10 && sign > 0)
+            return Integer.MAX_VALUE;
+        else if(string.length() > 10 && sign < 0)
+            return Integer.MIN_VALUE;
+        
+        //check for to large for int that long can handle
+        long num = new Long(string);
+        if(num * sign > Integer.MAX_VALUE)
+            return Integer.MAX_VALUE;
+        else if(num * sign < Integer.MIN_VALUE)
+            return Integer.MIN_VALUE;
+        
+        //it's an int
+        if(sign > 0)
+            return new Integer(string);
+        return new Integer("-" + string);
+    }
+}
