@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isPalindrome(String string) {
+        int front = 0;
+        int back = string.length() - 1;
+        string = string.toLowerCase();
+        
+        while(front < back) {
+            while(front < back && !isAplphaNumeric(string.charAt(front)))
+                front++;
+            while(back > front && !isAplphaNumeric(string.charAt(back)))
+                back--;
+            
+            if(string.charAt(front) != string.charAt(back))
+                return false;
+            
+            front++;
+            back--;
+        }
+        
+        return true;
+    }
+    
+    private boolean isAplphaNumeric(char letter) {
+        return letter >= '0' && letter <= '9' || letter >= 'a' && letter <= 'z' ? true : false;
+    }
+}
